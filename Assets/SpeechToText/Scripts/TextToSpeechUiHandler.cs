@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,7 @@ namespace SpeechToText.Scripts
         public Text status; 
     
         private TextToSpeech _textToSpeech;
-        private String _language = VoiceDataManager.Swedish;
+        private const string Language = VoiceDataManager.Swedish;
         private List<VoiceDataManager.Voice> _voices;
     
         public void Start()
@@ -25,7 +24,7 @@ namespace SpeechToText.Scripts
             _textToSpeech = TextToSpeech.Instance;
 
             VoiceDataManager vdm = new VoiceDataManager();
-            _voices = vdm.GetVoicesForLanguage(_language);
+            _voices = vdm.GetVoicesForLanguage(Language);
             List<Dropdown.OptionData> voicesOptions = 
                 _voices.Select(voice => new Dropdown.OptionData(voice.Name)).ToList();
 

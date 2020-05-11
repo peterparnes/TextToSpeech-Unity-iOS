@@ -76,8 +76,8 @@ didStartSpeechUtterance:(AVSpeechUtterance *)utterance
     NSArray *voices = [AVSpeechSynthesisVoice speechVoices];
     NSMutableString *result = [[NSMutableString alloc] init];
     for(AVSpeechSynthesisVoice *voice in voices) {
-        [result appendString:[NSString stringWithFormat:@"%@XYX%@XYX%@XYX%ldXYX", voice.language, voice.name, 
-          voice.identifier, (long)voice.quality]];
+        [result appendString:[NSString stringWithFormat:@"%@XYX%@XYX%@XYX%@XYX%ldXYX", voice.language, voice.name, 
+          voice.gender, voice.identifier, (long)voice.quality]];
     }
     
     return result;
