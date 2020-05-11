@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace SpeechAndText.Scripts
+namespace SpeechToText.Scripts
 {
 
     public class TextToSpeech : MonoBehaviour

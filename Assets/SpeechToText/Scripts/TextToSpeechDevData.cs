@@ -2,7 +2,7 @@
 
 // ReSharper disable StringLiteralTypo
 
-namespace SpeechAndText.Scripts
+namespace SpeechToText.Scripts
 {
     public class TextToSpeechDevData : MonoBehaviour
     {

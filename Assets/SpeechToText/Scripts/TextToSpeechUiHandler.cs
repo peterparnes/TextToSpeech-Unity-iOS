@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpeechAndText.Scripts
+namespace SpeechToText.Scripts
 {
     public class TextToSpeechUiHandler : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace SpeechAndText.Scripts
+namespace SpeechToText.Scripts
 {
     public class VoiceDataManager
     {
