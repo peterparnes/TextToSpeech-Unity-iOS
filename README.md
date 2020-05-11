@@ -1,30 +1,13 @@
-# Speech And Text in Unity iOS and Unity Android
-Speed to text and text to speed in Unity iOS and Unity Android
-I have provide all java and object c source. you can know how it work, optimization, or add any features
+# Text to speech on iOS from Unity 
+This is a major restructure of the original repository. This one is focused on only speech to text for iOS and includes an updated example UI to show and select voices. It is also targeted towards Swedish but language can easilly can changed in the code. The UI support changing voice, rate och pitch and also callback from native side with info if we are speaking or not. 
 
 ## Native Speech and Text
-* SpeechToText Android: https://developer.android.com/reference/android/speech/package-summary.html
-* TextToSpeed Android: https://developer.android.com/reference/android/speech/tts/TextToSpeech.html
-* SpeechToText iOS: https://developer.apple.com/reference/speech
 * TextToSpeech iOS: https://developer.apple.com/reference/avfoundation
+* Install new voices via settings->Accessibility->Spoken Content->Voices
 
-## Android
-* Hide default android popup, there's a bool to enable and disable if you don't want the popup to show up.
-```
-class SpeechToText
-{
-      public const bool isShowPopupAndroid = false;
-      ...
-```
-* Merge file AndroidManifest (If you want skip the default popup)
-## Tutorial Config in Xcode
-* Requires Xcode8 or higher. Target iOS 10.0
-* Add farmwork
+## Xcode
+* Tested with XCode 11 and iOS 13.0
+* No need to add any framework  
 
-      - speech.farmwork
-      - AVFoundation.framework
-      
-* Add permission
-
-      - Privacy – Microphone Usage Description      
-      - Privacy – Speech Recognition Usage Description
+## Contact 
+Peter Parnes, peter@parnes.com
