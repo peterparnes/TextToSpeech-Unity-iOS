@@ -49,6 +49,17 @@
     }
 }
 
+- (NSString *)GetAllVoicesAsString {
+    NSArray *voices = [AVSpeechSynthesisVoice speechVoices];
+    NSMutableString *result = [[NSMutableString alloc] init];
+    for(AVSpeechSynthesisVoice *voice in voices) {
+        [result appendString:[NSString stringWithFormat:@"%@XYX%@XYX%@XYX%ldXYX", voice.language, voice.name, 
+            voice.identifier, (long)voice.quality]];
+    }
+
+    return result;
+}
+
 - (void)StopSpeak
 {
     if([speechSynthesizer isSpeaking]) {
@@ -91,6 +102,18 @@ extern "C" {
     
     void _TAG_SettingSpeak(const char * _identifier, float _pitch, float _rate){
         [su SettingSpeak:_identifier pitchSpeak:_pitch rateSpeak:_rate];
+    }
+    
+    char* cStringCopy(const char* string) {
+            char* res = (char*)malloc(strlen(string) + 1);
+            strcpy(res, string);
+            return res;
+    }
+    
+    char* _TAG_GetAllVoices() {
+            NSString* str = [su GetAllVoicesAsString];
+            char* s = cStringCopy([str UTF8String]);
+            return s;
     }
 
 }
