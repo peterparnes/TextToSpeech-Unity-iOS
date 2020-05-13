@@ -2,9 +2,8 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace SpeechToText.Scripts
+namespace TextToSpeech.Scripts
 {
-
     public class TextToSpeech : MonoBehaviour
     {
         #region Init
