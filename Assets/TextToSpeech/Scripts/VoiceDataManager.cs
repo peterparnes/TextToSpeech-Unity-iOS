@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -36,18 +37,7 @@ namespace TextToSpeech
 
         public List<Voice> GetVoicesForLanguage(string language)
         {
-            var result = new List<Voice>();
-            foreach (var voice in _voices)
-            {
-                if (voice.Language.Equals(language))
-                {
-                    result.Add(voice);
-                }
-            }
-        
-            Debug.Log(result);
-
-            return result;
+            return _voices.Where(voice => voice.Language.Equals(language)).ToList();
         }
 
         private void ParseVoiceData()
