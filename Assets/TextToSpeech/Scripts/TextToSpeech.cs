@@ -49,14 +49,14 @@ namespace TextToSpeech
             pitch = newPitch;
             rate = newRate;
             
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
             _TAG_SettingSpeak(identifier, pitch, rate);
 #endif
         }
         
         public void StartSpeak(string message)
         {
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
             _TAG_StartSpeak(message);
 #else
             Debug.Log("StartSpeak: " + message);
@@ -65,7 +65,7 @@ namespace TextToSpeech
         
         public void StopSpeak()
         {
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
             _TAG_StopSpeak();
 #else
             Debug.Log("StopSpeak");
@@ -77,7 +77,7 @@ namespace TextToSpeech
 
         public string GetAllVoices()
         {
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
             return _TAG_GetAllVoices();
 #else
             return TextToSpeechDevData.SpeechData;
