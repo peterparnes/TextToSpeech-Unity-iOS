@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace TextToSpeech.Scripts
+namespace TextToSpeech
 {
     public class VoiceDataManager
     {
@@ -52,7 +52,7 @@ namespace TextToSpeech.Scripts
 
         private void ParseVoiceData()
         {
-            string[] data = Regex.Split(global::TextToSpeech.Scripts.TextToSpeech.Instance.GetAllVoices(),"XYX");
+            string[] data = Regex.Split(TextToSpeech.Instance.GetAllVoices(),"XYX");
             _voices = new Voice[data.Length/4];
             int count = 0;
             for (int i = 0; i < data.Length-3; i += 4)

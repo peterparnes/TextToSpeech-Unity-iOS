@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace TextToSpeech.Scripts
+namespace TextToSpeech
 {
     public class TextToSpeech : MonoBehaviour
     {
@@ -49,37 +49,39 @@ namespace TextToSpeech.Scripts
             pitch = newPitch;
             rate = newRate;
             
-#if UNITY_EDITOR
-#elif UNITY_IPHONE
+#if UNITY_IPHONE
             _TAG_SettingSpeak(identifier, pitch, rate);
 #endif
         }
         
         public void StartSpeak(string message)
         {
-#if UNITY_EDITOR
-            Debug.Log("StartSpeak: " + message);
-#elif UNITY_IPHONE
+#if UNITY_IPHONE
             _TAG_StartSpeak(message);
+#else
+            Debug.Log("StartSpeak: " + message);
 #endif
         }
         
         public void StopSpeak()
         {
-#if UNITY_EDITOR
-            Debug.Log("StopSpeak");
-#elif UNITY_IPHONE
+#if UNITY_IPHONE
             _TAG_StopSpeak();
+#else
+            Debug.Log("StopSpeak");
 #endif
+
+           
+
         }
 
         public string GetAllVoices()
         {
-//#if UNITY_EDITOR
+#if UNITY_IPHONE
+            return _TAG_GetAllVoices();
+#else
             return TextToSpeechDevData.SpeechData;
-//#elif UNITY_IPHONE
-//            return _TAG_GetAllVoices();
-//#endif
+#endif
         }
 
         public void OnSpeechRange(string message)
@@ -139,6 +141,10 @@ namespace TextToSpeech.Scripts
 
         [DllImport("__Internal")]
         private static extern void _TAG_StopSpeak();
+        
+        [DllImport("__Internal")]
+        private static extern string _TAG_GetAllVoices();
+        
 #endif
     }
 }

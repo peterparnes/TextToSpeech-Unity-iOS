@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TextToSpeech.Scripts
+namespace TextToSpeech
 {
     public class TextToSpeechUiHandler : MonoBehaviour
     {
@@ -15,13 +15,13 @@ namespace TextToSpeech.Scripts
         public Dropdown voicesSelector;
         public Text status; 
     
-        private global::TextToSpeech.Scripts.TextToSpeech _textToSpeech;
+        private global::TextToSpeech.TextToSpeech _textToSpeech;
         private const string Language = VoiceDataManager.Swedish;
         private List<VoiceDataManager.Voice> _voices;
     
         public void Start()
         {
-            _textToSpeech = global::TextToSpeech.Scripts.TextToSpeech.Instance;
+            _textToSpeech = TextToSpeech.Instance;
 
             VoiceDataManager vdm = new VoiceDataManager();
             _voices = vdm.GetVoicesForLanguage(Language);
