@@ -18,12 +18,10 @@ namespace TextToSpeech
         private global::TextToSpeech.TextToSpeech _textToSpeech;
         private const string Language = VoiceDataManager.Swedish;
         private List<VoiceDataManager.Voice> _voices;
-        private TextToSpeechBuffer _buffer;
     
         public void Start()
         {
             _textToSpeech = TextToSpeech.Instance;
-            _buffer = new TextToSpeechBuffer();
 
             VoiceDataManager vdm = new VoiceDataManager();
             _voices = vdm.GetVoicesForLanguage(Language);
