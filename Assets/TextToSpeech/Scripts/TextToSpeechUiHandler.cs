@@ -15,13 +15,15 @@ namespace TextToSpeech
         public Dropdown voicesSelector;
         public Text status; 
     
-        private global::TextToSpeech.TextToSpeech _textToSpeech;
+        private TextToSpeech _textToSpeech;
         private const string Language = VoiceDataManager.Swedish;
         private List<VoiceDataManager.Voice> _voices;
+        private TextToSpeechBuffer _buffer;
     
         public void Start()
         {
             _textToSpeech = TextToSpeech.Instance;
+            _buffer = new TextToSpeechBuffer(); 
 
             VoiceDataManager vdm = new VoiceDataManager();
             _voices = vdm.GetVoicesForLanguage(Language);
@@ -49,8 +51,6 @@ namespace TextToSpeech
 
         private void OnSpeakRangeCallback(string message)
         {
-            Debug.Log(message);
-            // SetStatusMessage(status.text += ".");
             SetStatusMessage("Speaking: " + message);
         }
 
@@ -66,7 +66,8 @@ namespace TextToSpeech
  
         public void OnSpeak()
         {
-            _textToSpeech.StartSpeak(textField.text);
+            // _textToSpeech.StartSpeak(textField.text);
+            _buffer.AddMessage(textField.text);
         }
 
         public void OnStopSpeak()
