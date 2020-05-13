@@ -47,9 +47,11 @@ namespace SpeechToText.Scripts
             SetStatusMessage("");
         }
 
-        private void OnSpeakRangeCallback(string obj)
+        private void OnSpeakRangeCallback(string message)
         {
-            SetStatusMessage(status.text += ".");
+            Debug.Log(message);
+            // SetStatusMessage(status.text += ".");
+            SetStatusMessage("Speaking: " + message);
         }
 
         private void OnStartCallBack()

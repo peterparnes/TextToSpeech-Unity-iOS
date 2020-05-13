@@ -76,11 +76,11 @@ namespace SpeechToText.Scripts
 
         public string GetAllVoices()
         {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             return TextToSpeechDevData.SpeechData;
-#elif UNITY_IPHONE
-            return _TAG_GetAllVoices();
-#endif
+//#elif UNITY_IPHONE
+//            return _TAG_GetAllVoices();
+//#endif
         }
 
         public void OnSpeechRange(string message)
@@ -140,9 +140,6 @@ namespace SpeechToText.Scripts
 
         [DllImport("__Internal")]
         private static extern void _TAG_StopSpeak();
-        
-        [DllImport("__Internal")]
-        private static extern string _TAG_GetAllVoices();
 #endif
     }
 }
