@@ -12,7 +12,6 @@ namespace TextToSpeech
 
         public TextToSpeechBuffer()
         {
-            Debug.Log("Hej");
             _messages = new List<string>();
             _textToSpeech = TextToSpeech.Instance;
             _textToSpeech.onStartCallBack += OnStartCallBack;
