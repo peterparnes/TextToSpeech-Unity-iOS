@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,25 +13,41 @@ namespace TextToSpeech
         public Slider pitchSlider;
         public Text rate;
         public Text pitch;
+        public Dropdown languagesSelector;
         public Dropdown voicesSelector;
         public Text status; 
     
         private TextToSpeech _textToSpeech;
-        private const string Language = VoiceDataManager.Swedish;
+        private const string DefaultLanguage = VoiceDataManager.Swedish;
         private List<VoiceDataManager.Voice> _voices;
         private TextToSpeechBuffer _buffer;
+        private IEnumerable<string> _languages;
+        private VoiceDataManager _vdm;
     
         public void Start()
         {
             _textToSpeech = TextToSpeech.Instance;
             _buffer = new TextToSpeechBuffer(); 
 
-            VoiceDataManager vdm = new VoiceDataManager();
-            _voices = vdm.GetVoicesForLanguage(Language);
-            List<Dropdown.OptionData> voicesOptions = 
-                _voices.Select(voice => new Dropdown.OptionData(voice.Name)).ToList();
+            _vdm = new VoiceDataManager();
 
-            voicesSelector.options = voicesOptions;
+            _languages = _vdm.GetAllLanguages();
+            var languagesDropdown = new List<Dropdown.OptionData>();
+            int initialIndex = 0;
+            int index = 0;
+            foreach (var language in _languages)
+            {
+                languagesDropdown.Add(new Dropdown.OptionData(language));
+                if (language == DefaultLanguage)
+                {
+                    initialIndex = index;
+                }
+                index++;
+            }
+            languagesSelector.options = languagesDropdown;
+            languagesSelector.SetValueWithoutNotify(initialIndex);
+
+            PopulateVoices(DefaultLanguage);
         
             rateSlider.value = _textToSpeech.rate;
             pitchSlider.value = _textToSpeech.pitch;
@@ -43,7 +60,7 @@ namespace TextToSpeech
             _textToSpeech.onSpeakRangeCallback += OnSpeakRangeCallback;
             _textToSpeech.onDoneCallback += OnDoneCallback;
         }
-
+        
         private void OnDoneCallback()
         {
             SetStatusMessage("");
@@ -66,7 +83,6 @@ namespace TextToSpeech
  
         public void OnSpeak()
         {
-            // _textToSpeech.StartSpeak(textField.text);
             _buffer.AddMessage(textField.text);
         }
 
@@ -79,6 +95,25 @@ namespace TextToSpeech
         {
             _textToSpeech.Setting(_voices[voicesSelector.value].Identifier, pitchSlider.value, rateSlider.value);
             UpdateTextValues();
+        }
+
+        public void OnLanguageChanged()
+        {
+            PopulateVoices(GetCurrentLanguage());
+            OnPitchAndRateChanged();
+        }
+        
+        private string GetCurrentLanguage()
+        {
+            return _languages.ElementAt(languagesSelector.value);
+        }
+
+        private void PopulateVoices(string language)
+        {
+            _voices = _vdm.GetVoicesForLanguage(language);
+            List<Dropdown.OptionData> voicesOptions = 
+                _voices.Select(voice => new Dropdown.OptionData(voice.Name)).ToList();
+            voicesSelector.options = voicesOptions;
         }
 
         private void UpdateTextValues()
